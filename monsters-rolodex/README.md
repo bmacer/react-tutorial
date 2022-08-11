@@ -1,3 +1,10 @@
+
+
+Lesson 27:
+There are two types of components: Functional and Class components
+
+--- END PERSONAL NOTES
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
