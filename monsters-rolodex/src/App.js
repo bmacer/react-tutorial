@@ -11,8 +11,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      monsters: []
+      monsters: [],
+      query: "",
     }
+    console.log("constructor() complete running...");
   }
 
   componentDidMount() {
@@ -24,12 +26,23 @@ class App extends Component {
         console.log(this.state);
       }
     ));
+    console.log("componentDidMount() completed running...")
   }
 
   render() {
+    console.log("render() running...");
+    const filteredMonsters = this.state.monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(this.state.query);
+    });
+    
     return (
       <div className="App">
-        {this.state.monsters.map((monster) => {
+        <input className="search-box" type="search" placeholder="Search Monsters" onChange={(event) => {
+          this.setState(() => {
+            return { query: event.target.value.toLocaleLowerCase() }
+          });
+        }}></input>
+        {filteredMonsters.map((monster) => {
           return <div key="{monster.id}"><h1>{monster.name}</h1></div>
         })}
       </div>
