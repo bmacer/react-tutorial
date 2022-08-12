@@ -28,20 +28,26 @@ class App extends Component {
     ));
     console.log("componentDidMount() completed running...")
   }
+  
+  handleQueryChange = (event) => {
+    this.setState(() => {
+      return { query: event.target.value.toLocaleLowerCase() }
+    });
+  }
 
   render() {
     console.log("render() running...");
-    const filteredMonsters = this.state.monsters.filter((monster) => {
-      return monster.name.toLocaleLowerCase().includes(this.state.query);
+
+    const { monsters, query } = this.state;
+    const { handleQueryChange } = this;
+
+    const filteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(query);
     });
     
     return (
       <div className="App">
-        <input className="search-box" type="search" placeholder="Search Monsters" onChange={(event) => {
-          this.setState(() => {
-            return { query: event.target.value.toLocaleLowerCase() }
-          });
-        }}></input>
+        <input className="search-box" type="search" placeholder="Search Monsters" onChange={handleQueryChange}></input>
         {filteredMonsters.map((monster) => {
           return <div key="{monster.id}"><h1>{monster.name}</h1></div>
         })}
