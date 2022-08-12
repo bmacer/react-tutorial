@@ -1,6 +1,8 @@
 import { Component } from 'react';
 
-import logo from './logo.svg';
+import CardList from './components/card-list/card-list.component';
+import SearchBox from './components/search-box/search-box.component';
+
 import './App.css';
 
 
@@ -14,7 +16,6 @@ class App extends Component {
       monsters: [],
       query: "",
     }
-    console.log("constructor() complete running...");
   }
 
   componentDidMount() {
@@ -23,10 +24,9 @@ class App extends Component {
     .then((users) => this.setState(() => {
         return {monsters: users};
       }, () => {
-        console.log(this.state);
+        // console.log(this.state);
       }
     ));
-    console.log("componentDidMount() completed running...")
   }
   
   handleQueryChange = (event) => {
@@ -47,10 +47,8 @@ class App extends Component {
     
     return (
       <div className="App">
-        <input className="search-box" type="search" placeholder="Search Monsters" onChange={handleQueryChange}></input>
-        {filteredMonsters.map((monster) => {
-          return <div key="{monster.id}"><h1>{monster.name}</h1></div>
-        })}
+        <SearchBox placeholder="Search Monsters" onChange={handleQueryChange} />
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
