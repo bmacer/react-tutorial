@@ -31,7 +31,7 @@ const App = () => {
       return monster.name.toLocaleLowerCase().includes(searchField);
     }));
   },
-  [searchField]);
+  [monsters, searchField]);
   
 
   return (
