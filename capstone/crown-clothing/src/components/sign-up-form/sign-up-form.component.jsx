@@ -1,8 +1,10 @@
 import "./sign-up-form-styles.scss";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import Button from "../button/button.component";
+
+import { UserContext } from "../../contexts/user.context";
 
 import {
   auth,
@@ -22,6 +24,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -38,6 +41,7 @@ const SignUpForm = () => {
         email,
         password
       );
+      setCurrentUser(user);
       const userDoc = await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch (error) {
@@ -49,10 +53,8 @@ const SignUpForm = () => {
   };
 
   const handleChange = (event) => {
-    // console.log(event);
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
-    console.log(formFields);
   };
 
   return (

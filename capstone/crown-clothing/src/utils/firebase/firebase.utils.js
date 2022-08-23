@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithRedirect,
+  signOut,
   signInWithPopup,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
@@ -44,7 +45,6 @@ export const createUserDocumentFromAuth = async (
   }
   const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
-  // console.log(userSnapshot);
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -72,17 +72,6 @@ export const signInWithEmail = async (email, password) => {
   return await signInWithEmailAndPassword(auth, email, password);
 };
 
-// export const signInWithEmail = async (email, password) => {
-//   if (!email || !password) return;
-//   try {
-//     return {
-//       response: await signInWithEmailAndPassword(auth, email, password),
-//       error: null,
-//     };
-//   } catch (e) {
-//     console.log(e.code);
-//
-//     }
-//   }
-// };
-// //
+export const signOutUser = () => {
+  signOut(auth);
+};
