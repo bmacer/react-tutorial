@@ -1,6 +1,9 @@
 import "./sign-up-form-styles.scss";
 
 import { useState } from "react";
+
+import Button from "../button/button.component";
+
 import {
   auth,
   createAuthUserWithEmailAndPassword,
@@ -93,7 +96,7 @@ const SignUpForm = () => {
           required
         />
 
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
   );
