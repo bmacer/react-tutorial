@@ -66,3 +66,23 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
 };
+
+export const signInWithEmail = async (email, password) => {
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
+};
+
+// export const signInWithEmail = async (email, password) => {
+//   if (!email || !password) return;
+//   try {
+//     return {
+//       response: await signInWithEmailAndPassword(auth, email, password),
+//       error: null,
+//     };
+//   } catch (e) {
+//     console.log(e.code);
+//
+//     }
+//   }
+// };
+// //
