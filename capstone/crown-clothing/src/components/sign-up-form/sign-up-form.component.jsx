@@ -7,7 +7,6 @@ import Button from "../button/button.component";
 import { UserContext } from "../../contexts/user.context";
 
 import {
-  auth,
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
@@ -41,7 +40,6 @@ const SignUpForm = () => {
         email,
         password
       );
-      setCurrentUser(user);
       const userDoc = await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch (error) {
