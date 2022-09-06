@@ -5,7 +5,6 @@ import {
   signInWithEmail,
 } from "../../utils/firebase/firebase.utils";
 
-import { createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 import { useState } from "react";
 
 import FormInput from "../form-input/form-input.component";
