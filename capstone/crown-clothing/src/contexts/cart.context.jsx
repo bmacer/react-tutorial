@@ -24,6 +24,27 @@ const addCartItem = (cartItems, productToAdd) => {
   return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
+const decrementCartItem = (cartItems, productToRemove) => {
+  console.log("decrementin");
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === productToRemove.id
+  );
+
+  if (existingCartItem.quantity === 1) {
+    return removeCartItem(cartItems, productToRemove);
+  }
+
+  return cartItems.map((cartItem) =>
+    cartItem.id === productToRemove.id
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem
+  );
+};
+
+const removeCartItem = (cartItems, productToRemove) => {
+  return cartItems.filter((item) => item.id !== productToRemove.id);
+};
+
 export const CartProvider = ({ children }) => {
   const [dropdownMenuHidden, setDropdownMenuHidden] = useState(true);
   const [cartItems, setCartItems] = useState([]);
@@ -42,6 +63,14 @@ export const CartProvider = ({ children }) => {
     setCartCount(cartCount + 1);
   };
 
+  const removeEntireItem = (productToRemove) => {
+    setCartItems(removeCartItem(cartItems, productToRemove));
+  };
+
+  const removeSingleItem = (productToRemove) => {
+    setCartItems(decrementCartItem(cartItems, productToRemove));
+  };
+
   const value = {
     dropdownMenuHidden,
     setDropdownMenuHidden,
@@ -49,6 +78,8 @@ export const CartProvider = ({ children }) => {
     addItemToCart,
     cartCount,
     setCartCount,
+    removeEntireItem,
+    removeSingleItem,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
